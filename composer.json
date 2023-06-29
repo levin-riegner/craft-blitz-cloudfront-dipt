@@ -34,5 +34,11 @@
         "developer": "PutYourLightsOn",
         "developerUrl": "https://putyourlightson.com/",
         "changelogUrl": "https://raw.githubusercontent.com/putyourlightson/craft-blitz-cloudfront/v3/CHANGELOG.md"
+    },
+    "config": {
+        "allow-plugins": {
+            "craftcms/plugin-installer": true,
+            "yiisoft/yii2-composer": true
+        }
     }
 }

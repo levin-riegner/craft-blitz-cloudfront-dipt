@@ -66,8 +66,9 @@ class CloudFrontPurger extends BaseCachePurger
      */
     public function init(): void
     {
-        Event::on(View::class, View::EVENT_REGISTER_CP_TEMPLATE_ROOTS,
-            function(RegisterTemplateRootsEvent $event) {
+        Event::on(
+            View::class, View::EVENT_REGISTER_CP_TEMPLATE_ROOTS,
+            function (RegisterTemplateRootsEvent $event) {
                 $event->roots['blitz-cloudfront'] = __DIR__ . '/templates/';
             }
         );
@@ -193,6 +194,9 @@ class CloudFrontPurger extends BaseCachePurger
     private function _getPathFromUrl(string $url): string
     {
         $queryString = parse_url($url, PHP_URL_QUERY);
+        parse_str($queryString, $queryArray);
+        unset($queryArray['useini']);
+        $queryString = http_build_query($queryArray);
         $path = parse_url($url, PHP_URL_PATH);
         $path .= $queryString ? '?' . $queryString : '';
 
